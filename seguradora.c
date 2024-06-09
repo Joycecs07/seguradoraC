@@ -4,7 +4,6 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 #include <locale.h> 
-
 // Função para copiar strings
 void copiarString(char destino[], const char origem[]) {
     int i = 0;
@@ -13,6 +12,12 @@ void copiarString(char destino[], const char origem[]) {
         i++;
     }
     destino[i] = '\0';
+}
+
+// Função para aguardar o usuário pressionar Enter
+void esperarEnter() {
+    printf("Pressione Enter para voltar ao menu...");
+    while (getchar() != '\n');  // Aguarda até encontrar um Enter
 }
 
 int main() {
@@ -90,11 +95,13 @@ int main() {
         printf("[3] Sair do sistema\n");
         printf("Selecione uma das opções para continuar:");
         scanf("%d", &op);
-
+		getchar(); // Limpa o buffer após o scanf
+		
         switch (op) {
             case 1:
              // Exibe o manual de usuário
                 printf("%s\n", manualUsuario);
+                esperarEnter(); // Aguarda o usuário pressionar Enter
                 break;
 
             case 2:
@@ -114,8 +121,7 @@ int main() {
             scanf("%5s", CID);
             valorSeguro += 150.0; // Incrementa o valor do seguro para deficientes
              } 
-			 else 
-             {
+			 else {
             printf("Você não é portador de deficiência.\n");
             valorSeguro += 50.0; // Incrementa o valor do seguro para não deficientes
         }
